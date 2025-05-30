@@ -4,8 +4,9 @@ import Microsoft.Quantum.Math.*;
 
 operation Main(): Int {
     let max = 100;
+    let min = 10;
     Message($"Generating a random number in the range [0, {max}]...");
-    return GenerateRandomNumber(max);
+    return GenerateRandomNumber(max, min);
 }
 operation GenerateRandomBit(): Result {
     use q = Qubit();
@@ -15,8 +16,8 @@ operation GenerateRandomBit(): Result {
     return result;
 }
 
-// Generates a random number in the range [0, max].
-operation GenerateRandomNumber(max: Int): Int {
+// Generates a random number in the range [min, max].
+operation GenerateRandomNumber(max: Int, min: Int): Int {
 
     mutable bits = []; // Empty mutable array to store the randomly generated bits.
     let nBits = BitSizeI(max); // Number of bits needed to represent the maximum value.
@@ -27,5 +28,5 @@ operation GenerateRandomNumber(max: Int): Int {
 
     let sample = ResultArrayAsInt(bits);
 
-    return sample > max ? GenerateRandomNumber(max) | sample;
+    return (sample > max or sample < min) ? GenerateRandomNumber(max, min) | sample;
 }
