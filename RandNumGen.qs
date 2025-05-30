@@ -5,7 +5,7 @@ import Microsoft.Quantum.Math.*;
 operation Main(): Int {
     let max = 100;
     let min = 10;
-    Message($"Generating a random number in the range [0, {max}]...");
+    Message($"Generating a random number in the range [{min}, {max}]...");
     return GenerateRandomNumber(max, min);
 }
 operation GenerateRandomBit(): Result {
